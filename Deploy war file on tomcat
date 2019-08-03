@@ -1,0 +1,26 @@
+ node {
+   stage('SCM Checkout'){
+    // Clone repo
+	git branch: 'master', 
+	credentialsId: 'github', 
+	url: 'https://github.com/SampatKeshri/myweb'
+   }
+	stage('Mvn Package'){
+	   // Build using maven
+	   def mvn = tool (name: 'Maven', type: 'maven') + '/bin/mvn'
+	   sh "${mvn} clean package"
+	}
+	stage('Deploy to Tomcat'){
+      
+      sshagent(['tomcat-dev']) {
+         sh 'scp -o StrictHostKeyChecking=no target/*.war ec2-user@172.31.31.41:/home/ec2-user/apache8/webapps/'
+      }
+	}
+   stage('Email Notification'){
+		mail bcc: '', body: '''Hi Team, You build successfully deployed
+
+Thanks,
+DevOps Team''', cc: '', from: '', replyTo: '', subject: 'Build Success', to: 'keshrisampat@gmail.com'
+    }
+}
+
