@@ -12,8 +12,7 @@
 		<docker.image.prefix>kammana</docker.image.prefix>
 	</properties>
 	<dependencies>
-
-		
+	
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -22,6 +21,11 @@
 		</dependency>
 
 	</dependencies>
+	
+	<goals>
+		<goal> install </goal>
+	</goals>
+
 	
 	<distributionManagement>
 		 <snapshotRepository>
