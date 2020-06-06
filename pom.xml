@@ -22,11 +22,6 @@
 
 	</dependencies>
 	
-	<goals>
-		<goal> install </goal>
-	</goals>
-
-	
 	<distributionManagement>
 		 <snapshotRepository>
 		    <id>nexusRepo</id>
